@@ -1,0 +1,31 @@
+package com.example.mobilliumvitrinovachallangeapp.model
+
+data class Product(
+    val cargo_time: Int,
+    val category: CategoryX,
+    val category_id: Int,
+    val code: Any,
+    val comment_count: Int,
+    val commission_rate: Int,
+    val definition: String,
+    val difference: String,
+    val id: Int,
+    val images: List<Image>,
+    val is_active: Boolean,
+    val is_approved: Boolean,
+    val is_cargo_free: Boolean,
+    val is_editor_choice: Boolean,
+    val is_liked: Boolean,
+    val is_new: Boolean,
+    val is_owner: Boolean,
+    val like_count: Int,
+    val max_installment: Any,
+    val old_price: Int,
+    val price: Int,
+    val reject_reason: Any,
+    val share_url: String,
+    val shop: Shop,
+    val slug: String,
+    val stock: Int,
+    val title: String
+)

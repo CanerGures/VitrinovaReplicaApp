@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MobilliumVitrinovaChallangeApp</string>
+    <string name="title">title</string>
+    <string name="subtitle">sub title</string>
+    <string name="search">Search</string>
+    <string name="voicesearchcoverimage">voiceSearchCoverImage</string>
+    <string name="featureimagescover">featureimagescover</string>
+    <string name="featureimages">featureimages</string>
+</resources>
