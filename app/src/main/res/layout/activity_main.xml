@@ -123,8 +123,45 @@
                     android:src="@drawable/ic_forward"
                     app:layout_constraintBottom_toBottomOf="@id/wholeProductText"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/wholeProductText"
-                    app:layout_constraintTop_toTopf="@id/wholeProductText" />
+                    app:layout_constraintTop_toTopOf="@+id/wholeProductText" />
+
+                <ImageView
+                    android:id="@+id/categoriesField"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/categoryfield"
+                    android:src="@color/black20"
+                    app:layout_constraintBottom_toBottomOf="@id/recyclerViewCategories"
+                    app:layout_constraintTop_toBottomOf="@id/recyclerViewProduct" />
+
+                <TextView
+                    android:id="@+id/categoriesHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/layout_dimen"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:text="@string/categories"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:textColor="@color/mainGrey_Dark"
+                    android:textSize="@dimen/font_large"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/categoriesField"
+                    app:layout_constraintTop_toBottomOf="@id/recyclerViewProduct"
+                    app:layout_constraintTop_toTopOf="@id/categoriesField" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewCategories"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_dimen"
+                    android:alpha="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/categoriesField"
+                    app:layout_constraintTop_toBottomOf="@id/categoriesHeader" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

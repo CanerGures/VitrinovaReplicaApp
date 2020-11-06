@@ -10,4 +10,7 @@
     <string name="most_new">EN YENİ ÜRÜNLER</string>
     <string name="wholeProduct">TÜMÜ</string>
     <string name="arrowbutton">arrowButton</string>
+    <string name="categories">KATEGORİLER</string>
+    <string name="category_images">categoryImages</string>
+    <string name="categoryfield">categoryField</string>
 </resources>

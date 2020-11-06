@@ -11,11 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arlib.floatingsearchview.FloatingSearchView
+import com.example.mobilliumvitrinovachallangeapp.adapter.GetCategoryAdapter
 import com.example.mobilliumvitrinovachallangeapp.adapter.GetContentAdapter
 import com.example.mobilliumvitrinovachallangeapp.adapter.GetProductAdapter
 import com.example.mobilliumvitrinovachallangeapp.api.apiservice.ApiService
 import com.example.mobilliumvitrinovachallangeapp.api.client.WebClient
 import com.example.mobilliumvitrinovachallangeapp.api.repository.ContentRepository
+import com.example.mobilliumvitrinovachallangeapp.model.Category
 import com.example.mobilliumvitrinovachallangeapp.model.Featured
 import com.example.mobilliumvitrinovachallangeapp.model.Product
 import com.example.mobilliumvitrinovachallangeapp.util.MarginItemDecoration
@@ -25,6 +27,7 @@ import java.util.*
 
 lateinit var recycView: RecyclerView
 lateinit var recycViewProducts: RecyclerView
+lateinit var recycViewCategories: RecyclerView
 private var homeViewModel: ContentViewModel? = null
 lateinit var searchView: FloatingSearchView
 lateinit var swipeToRefresh: SwipeRefreshLayout
@@ -61,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         homeViewModel?.fetchLive?.observe(this) {
             val listContent: List<Featured> = it[0].featured
             val listProduct: List<Product> = it[1].products
+            val listCategories: List<Category> = it[2].categories
 
             recycView = findViewById(R.id.recyclerView)
             recycView.adapter = GetContentAdapter(listContent)
@@ -74,6 +78,16 @@ class MainActivity : AppCompatActivity() {
             recycViewProducts.addItemDecoration(
                 MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.product_margin))
             )
+
+            recycViewCategories = findViewById(R.id.recyclerViewCategories)
+            recycViewCategories.adapter = GetCategoryAdapter(listCategories)
+            recycViewCategories.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            recycViewCategories.addItemDecoration(
+                MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.product_margin))
+            )
+
+
 
 
 
