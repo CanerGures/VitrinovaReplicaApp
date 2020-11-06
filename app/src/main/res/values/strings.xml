@@ -6,4 +6,8 @@
     <string name="voicesearchcoverimage">voiceSearchCoverImage</string>
     <string name="featureimagescover">featureimagescover</string>
     <string name="featureimages">featureimages</string>
+    <string name="product_images">product_images</string>
+    <string name="most_new">EN YENİ ÜRÜNLER</string>
+    <string name="wholeProduct">TÜMÜ</string>
+    <string name="arrowbutton">arrowButton</string>
 </resources>

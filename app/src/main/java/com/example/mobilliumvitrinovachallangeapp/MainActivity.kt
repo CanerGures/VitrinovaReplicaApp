@@ -9,19 +9,25 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arlib.floatingsearchview.FloatingSearchView
 import com.example.mobilliumvitrinovachallangeapp.adapter.GetContentAdapter
+import com.example.mobilliumvitrinovachallangeapp.adapter.GetProductAdapter
 import com.example.mobilliumvitrinovachallangeapp.api.apiservice.ApiService
 import com.example.mobilliumvitrinovachallangeapp.api.client.WebClient
 import com.example.mobilliumvitrinovachallangeapp.api.repository.ContentRepository
 import com.example.mobilliumvitrinovachallangeapp.model.Featured
+import com.example.mobilliumvitrinovachallangeapp.model.Product
+import com.example.mobilliumvitrinovachallangeapp.util.MarginItemDecoration
 import com.example.mobilliumvitrinovachallangeapp.viewmodel.ContentViewModel
 import com.example.mobilliumvitrinovachallangeapp.viewmodel.ViewModelFactory
 import java.util.*
 
 lateinit var recycView: RecyclerView
+lateinit var recycViewProducts: RecyclerView
 private var homeViewModel: ContentViewModel? = null
 lateinit var searchView: FloatingSearchView
+lateinit var swipeToRefresh: SwipeRefreshLayout
 private val service: ApiService by lazy { WebClient.buildService(ApiService::class.java) }
 private var REQUEST_CODE_SPEECH_INPUT = 100
 
@@ -32,10 +38,16 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         val voiceButton: ImageView = findViewById(R.id.voiceSearchImage)
         searchView = findViewById(R.id.floating_search_view)
+        swipeToRefresh = findViewById(R.id.itemSwipeToRefresh)
 
 
         voiceButton.setOnClickListener {
             speech()
+        }
+
+        swipeToRefresh.setOnRefreshListener {
+            observeResponse()
+
         }
 
         observeResponse()
@@ -47,12 +59,27 @@ class MainActivity : AppCompatActivity() {
         val repo = ContentRepository(service)
         homeViewModel = ViewModelFactory(repo).create(ContentViewModel::class.java)
         homeViewModel?.fetchLive?.observe(this) {
-            val list: List<Featured> = it[0].featured
+            val listContent: List<Featured> = it[0].featured
+            val listProduct: List<Product> = it[1].products
 
             recycView = findViewById(R.id.recyclerView)
-            recycView.adapter = GetContentAdapter(list)
+            recycView.adapter = GetContentAdapter(listContent)
             recycView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+            recycViewProducts = findViewById(R.id.recyclerViewProduct)
+            recycViewProducts.adapter = GetProductAdapter(listProduct)
+            recycViewProducts.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            recycViewProducts.addItemDecoration(
+                MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.product_margin))
+            )
+
+
+
+            if (swipeToRefresh.isRefreshing) {
+                swipeToRefresh.isRefreshing = false
+            }
         }
 
     }
