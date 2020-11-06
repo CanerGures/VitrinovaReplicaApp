@@ -4,8 +4,10 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mobilliumvitrinovachallangeapp.R
@@ -14,6 +16,7 @@ import com.example.mobilliumvitrinovachallangeapp.model.Product
 class GetProductAdapter(private val product: List<Product>) :
     RecyclerView.Adapter<GetProductAdapter.GetProductViewHolder>() {
     inner class GetProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val parentCard: CardView = itemView.findViewById(R.id.parentProductCard)
         val image: ImageView = itemView.findViewById(R.id.productImage)
         val textHeader: TextView = itemView.findViewById(R.id.productHeader)
         val textSubHeader: TextView = itemView.findViewById(R.id.productSubHeader)
@@ -30,6 +33,8 @@ class GetProductAdapter(private val product: List<Product>) :
 
     override fun onBindViewHolder(holder: GetProductViewHolder, position: Int) {
         val currentItem = product[position]
+        holder.parentCard.animation =
+            AnimationUtils.loadAnimation(holder.itemView.context, R.anim.rv_animations)
         Glide.with(holder.itemView.context)
             .load(currentItem.images[0].url)
             .fitCenter()

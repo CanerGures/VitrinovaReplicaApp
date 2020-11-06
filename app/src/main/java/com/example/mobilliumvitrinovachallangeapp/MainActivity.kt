@@ -63,9 +63,6 @@ class MainActivity : AppCompatActivity() {
             observeResponse()
 
         }
-
-
-
         observeResponse()
 
     }
@@ -76,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         val repo = ContentRepository(service)
         homeViewModel = ViewModelFactory(repo).create(ContentViewModel::class.java)
         homeViewModel?.fetchLive?.observe(this) {
-
+            val snapHelper: SnapHelper = PagerSnapHelper()
             val listContent: List<Featured> = it[0].featured
             val listProduct: List<Product> = it[1].products
             val listCategories: List<Category> = it[2].categories
@@ -123,8 +120,8 @@ class MainActivity : AppCompatActivity() {
             recycViewShops.addItemDecoration(
                 MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.shop_margin))
             )
-            val snapHelper: SnapHelper = PagerSnapHelper()
-            snapHelper.attachToRecyclerView(recycViewShops)
+            if (recycViewShops.onFlingListener == null)
+                snapHelper.attachToRecyclerView(recycViewShops)
 
             if (swipeToRefresh.isRefreshing) {
                 swipeToRefresh.isRefreshing = false
