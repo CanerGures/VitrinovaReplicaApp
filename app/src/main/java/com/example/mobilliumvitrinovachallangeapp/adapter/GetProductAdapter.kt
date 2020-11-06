@@ -36,9 +36,9 @@ class GetProductAdapter(private val product: List<Product>) :
             .into(holder.image)
         holder.textHeader.text = currentItem.title
         holder.textSubHeader.text = currentItem.shop.name
-        holder.itemPrice.text = "${currentItem.price}TL"
+        holder.itemPrice.text = "${currentItem.price} TL"
         if (currentItem.old_price != 0) {
-            holder.itemPriceDiscount.text = "${currentItem.old_price}TL"
+            holder.itemPriceDiscount.text = "${currentItem.old_price} TL"
             holder.itemPriceDiscount.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         } else {
             holder.itemPriceDiscount.visibility = View.GONE

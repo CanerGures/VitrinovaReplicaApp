@@ -36,12 +36,11 @@
                     app:floatingSearch_searchHint="Search..."
                     app:floatingSearch_showSearchKey="false"
                     app:floatingSearch_suggestionsListAnimDuration="250"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
+                    android:id="@+id/rvFeatured"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginTop="64dp"
@@ -62,15 +61,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintGuide_percent=".35" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewProduct"
+                    android:id="@+id/rvProduct"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginStart="10dp"
@@ -79,15 +72,16 @@
                     android:alpha="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/guideline4" />
+                    app:layout_constraintTop_toBottomOf="@+id/wholeProductText" />
 
                 <TextView
+                    android:id="@+id/productFieldTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/layout_dimen"
                     android:layout_marginTop="10dp"
                     android:ellipsize="end"
-                    android:text="@string/most_new"
+                    android:text="@string/title"
                     android:textAlignment="viewStart"
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
@@ -96,7 +90,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/wholeProductText"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/recyclerView" />
+                    app:layout_constraintTop_toBottomOf="@id/rvFeatured" />
 
                 <TextView
                     android:id="@+id/wholeProductText"
@@ -109,10 +103,10 @@
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
                     android:textColor="@color/mainGrey_Dark"
-                    android:textSize="@dimen/font_large"
+                    android:textSize="@dimen/font_small"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@id/arrowButton"
-                    app:layout_constraintTop_toBottomOf="@id/recyclerView" />
+                    app:layout_constraintTop_toBottomOf="@id/rvFeatured" />
 
                 <ImageView
                     android:id="@+id/arrowButton"
@@ -131,18 +125,18 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="10dp"
                     android:contentDescription="@string/categoryfield"
-                    android:src="@color/black20"
-                    app:layout_constraintBottom_toBottomOf="@id/recyclerViewCategories"
-                    app:layout_constraintTop_toBottomOf="@id/recyclerViewProduct" />
+                    android:src="@color/black5"
+                    app:layout_constraintBottom_toBottomOf="@id/rvCategories"
+                    app:layout_constraintTop_toBottomOf="@id/rvProduct" />
 
                 <TextView
-                    android:id="@+id/categoriesHeader"
+                    android:id="@+id/categoriesFieldTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/layout_dimen"
                     android:layout_marginTop="10dp"
                     android:ellipsize="end"
-                    android:text="@string/categories"
+                    android:text="@string/title"
                     android:textAlignment="viewStart"
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
@@ -150,19 +144,138 @@
                     android:textSize="@dimen/font_large"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="@+id/categoriesField"
-                    app:layout_constraintTop_toBottomOf="@id/recyclerViewProduct"
+                    app:layout_constraintTop_toBottomOf="@id/rvProduct"
                     app:layout_constraintTop_toTopOf="@id/categoriesField" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewCategories"
+                    android:id="@+id/rvCategories"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_margin="@dimen/layout_dimen"
                     android:alpha="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/categoriesField"
-                    app:layout_constraintTop_toBottomOf="@id/categoriesHeader" />
+                    app:layout_constraintTop_toBottomOf="@id/categoriesFieldTitle" />
 
+                <TextView
+                    android:id="@+id/collectionsFieldTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/layout_dimen"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:text="@string/title"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:textColor="@color/mainGrey_Dark"
+                    android:textSize="@dimen/font_large"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/wholeCollectionText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/categoriesField" />
+
+                <TextView
+                    android:id="@+id/wholeCollectionText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:text="@string/wholeProduct"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:textColor="@color/mainGrey_Dark"
+                    android:textSize="@dimen/font_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/arrowButton"
+                    app:layout_constraintTop_toBottomOf="@id/categoriesField" />
+
+                <ImageView
+                    android:id="@+id/arrowButtonCollection"
+                    android:layout_width="15dp"
+                    android:layout_height="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/arrowbutton"
+                    android:src="@drawable/ic_forward"
+                    app:layout_constraintBottom_toBottomOf="@id/wholeCollectionText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/wholeCollectionText" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCollections"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_dimen"
+                    android:alpha="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/wholeCollectionText" />
+
+                <ImageView
+                    android:id="@+id/editorsChoiceField"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/categoryfield"
+                    android:src="@color/black5"
+                    app:layout_constraintBottom_toBottomOf="@id/rvShops"
+                    app:layout_constraintTop_toBottomOf="@id/rvCollections" />
+
+                <TextView
+                    android:id="@+id/shopsFieldTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/layout_dimen"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:text="@string/title"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:textColor="@color/mainGrey_Dark"
+                    android:textSize="@dimen/font_large"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/wholeCollectionText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/editorsChoiceField" />
+
+                <TextView
+                    android:id="@+id/wholeeditorsChoiceText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:text="@string/wholeProduct"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:textColor="@color/mainGrey_Dark"
+                    android:textSize="@dimen/font_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/arrowButtonEditorsChoice"
+                    app:layout_constraintTop_toTopOf="@id/editorsChoiceField" />
+
+                <ImageView
+                    android:id="@+id/arrowButtonEditorsChoice"
+                    android:layout_width="15dp"
+                    android:layout_height="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/arrowbutton"
+                    android:src="@drawable/ic_forward"
+                    app:layout_constraintBottom_toBottomOf="@id/wholeeditorsChoiceText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/wholeeditorsChoiceText" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvShops"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_dimen"
+                    android:alpha="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/shopsFieldTitle" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

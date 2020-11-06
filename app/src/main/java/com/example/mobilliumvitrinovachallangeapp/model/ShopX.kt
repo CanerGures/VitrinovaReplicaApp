@@ -9,7 +9,7 @@ data class ShopX(
     val id: Int,
     val is_editor_choice: Boolean,
     val is_following: Boolean,
-    val logo: Any,
+    val logo: LogoImages,
     val name: String,
     val name_updateable: Boolean,
     val product_count: Int,
@@ -17,5 +17,6 @@ data class ShopX(
     val shop_payment_id: Int,
     val shop_rate: Int,
     val slug: String,
-    val vacation_mode: Int
+    val vacation_mode: Int,
+    val popular_products: List<PopularProducts>
 )

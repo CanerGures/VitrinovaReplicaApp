@@ -13,4 +13,13 @@
     <string name="categories">KATEGORİLER</string>
     <string name="category_images">categoryImages</string>
     <string name="categoryfield">categoryField</string>
+    <string name="collections">KOLEKSİYONLAR</string>
+    <string name="collectionImage">collectionImage</string>
+    <string name="collectionImageShadow">collectionImageShadow</string>
+    <string name="vitrine_git_button">VİTRİNE GİT</string>
+    <string name="shop_logo">shopLogo</string>
+    <string name="product_image_3">productImage3</string>
+    <string name="product_image_2">productImage2</string>
+    <string name="product_image_1">productImage1</string>
+    <string name="footer_shadow">footerShadow</string>
 </resources>

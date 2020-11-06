@@ -5,32 +5,40 @@ import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arlib.floatingsearchview.FloatingSearchView
-import com.example.mobilliumvitrinovachallangeapp.adapter.GetCategoryAdapter
-import com.example.mobilliumvitrinovachallangeapp.adapter.GetContentAdapter
-import com.example.mobilliumvitrinovachallangeapp.adapter.GetProductAdapter
+import com.example.mobilliumvitrinovachallangeapp.adapter.*
 import com.example.mobilliumvitrinovachallangeapp.api.apiservice.ApiService
 import com.example.mobilliumvitrinovachallangeapp.api.client.WebClient
 import com.example.mobilliumvitrinovachallangeapp.api.repository.ContentRepository
-import com.example.mobilliumvitrinovachallangeapp.model.Category
-import com.example.mobilliumvitrinovachallangeapp.model.Featured
-import com.example.mobilliumvitrinovachallangeapp.model.Product
+import com.example.mobilliumvitrinovachallangeapp.model.*
+import com.example.mobilliumvitrinovachallangeapp.model.Collection
 import com.example.mobilliumvitrinovachallangeapp.util.MarginItemDecoration
 import com.example.mobilliumvitrinovachallangeapp.viewmodel.ContentViewModel
 import com.example.mobilliumvitrinovachallangeapp.viewmodel.ViewModelFactory
 import java.util.*
 
+
 lateinit var recycView: RecyclerView
 lateinit var recycViewProducts: RecyclerView
 lateinit var recycViewCategories: RecyclerView
+lateinit var recycViewCollections: RecyclerView
+lateinit var recycViewShops: RecyclerView
 private var homeViewModel: ContentViewModel? = null
 lateinit var searchView: FloatingSearchView
 lateinit var swipeToRefresh: SwipeRefreshLayout
+lateinit var titlesProducts: TextView
+lateinit var titlesCategories: TextView
+lateinit var titlesCollections: TextView
+lateinit var titlesShops: TextView
+lateinit var titlesShop1: TextView
 private val service: ApiService by lazy { WebClient.buildService(ApiService::class.java) }
 private var REQUEST_CODE_SPEECH_INPUT = 100
 
@@ -42,7 +50,10 @@ class MainActivity : AppCompatActivity() {
         val voiceButton: ImageView = findViewById(R.id.voiceSearchImage)
         searchView = findViewById(R.id.floating_search_view)
         swipeToRefresh = findViewById(R.id.itemSwipeToRefresh)
-
+        titlesProducts = findViewById(R.id.productFieldTitle)
+        titlesCategories = findViewById(R.id.categoriesFieldTitle)
+        titlesCollections = findViewById(R.id.collectionsFieldTitle)
+        titlesShops = findViewById(R.id.shopsFieldTitle)
 
         voiceButton.setOnClickListener {
             speech()
@@ -53,25 +64,36 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
+
         observeResponse()
 
     }
 
     private fun observeResponse() {
 
+        swipeToRefresh.isRefreshing = true
         val repo = ContentRepository(service)
         homeViewModel = ViewModelFactory(repo).create(ContentViewModel::class.java)
         homeViewModel?.fetchLive?.observe(this) {
+
             val listContent: List<Featured> = it[0].featured
             val listProduct: List<Product> = it[1].products
             val listCategories: List<Category> = it[2].categories
+            val listCollections: List<Collection> = it[3].collections
+            val listShops: List<ShopX> = it[4].shops
 
-            recycView = findViewById(R.id.recyclerView)
+            titlesProducts.text = it[1].title
+            titlesCategories.text = it[2].title
+            titlesCollections.text = it[3].title
+            titlesShops.text = it[4].title
+
+            recycView = findViewById(R.id.rvFeatured)
             recycView.adapter = GetContentAdapter(listContent)
             recycView.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-            recycViewProducts = findViewById(R.id.recyclerViewProduct)
+            recycViewProducts = findViewById(R.id.rvProduct)
             recycViewProducts.adapter = GetProductAdapter(listProduct)
             recycViewProducts.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -79,7 +101,7 @@ class MainActivity : AppCompatActivity() {
                 MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.product_margin))
             )
 
-            recycViewCategories = findViewById(R.id.recyclerViewCategories)
+            recycViewCategories = findViewById(R.id.rvCategories)
             recycViewCategories.adapter = GetCategoryAdapter(listCategories)
             recycViewCategories.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -87,9 +109,22 @@ class MainActivity : AppCompatActivity() {
                 MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.product_margin))
             )
 
-
-
-
+            recycViewCollections = findViewById(R.id.rvCollections)
+            recycViewCollections.adapter = GetCollectionAdapter(listCollections)
+            recycViewCollections.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            recycViewCollections.addItemDecoration(
+                MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.product_margin))
+            )
+            recycViewShops = findViewById(R.id.rvShops)
+            recycViewShops.adapter = GetEditorsChoiceAdapter(listShops)
+            recycViewShops.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            recycViewShops.addItemDecoration(
+                MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.shop_margin))
+            )
+            val snapHelper: SnapHelper = PagerSnapHelper()
+            snapHelper.attachToRecyclerView(recycViewShops)
 
             if (swipeToRefresh.isRefreshing) {
                 swipeToRefresh.isRefreshing = false

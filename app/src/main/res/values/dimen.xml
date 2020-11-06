@@ -4,6 +4,10 @@
     <dimen name="font_large">16sp</dimen>
     <dimen name="font_medium">14sp</dimen>
     <dimen name="product_margin">1dp</dimen>
+    <dimen name="shop_margin">4dp</dimen>
     <dimen name="layout_dimen">14dp</dimen>
+    <dimen name="product_title_dimen">20dp</dimen>
+    <dimen name="card_corner_radius">6dp</dimen>
+    <dimen name="elevation">4dp</dimen>
 
 </resources>
