@@ -55,7 +55,7 @@
                     android:layout_height="56dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="8dp"
-                    android:contentDescription="@string/voicesearchcoverimage"
+                    android:contentDescription="@string/voice_search_cover_image"
                     android:elevation="4dp"
                     android:src="@color/transparent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:ellipsize="end"
-                    android:text="@string/wholeProduct"
+                    android:text="@string/whole_product"
                     android:textAlignment="viewStart"
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
@@ -113,7 +113,7 @@
                     android:layout_width="15dp"
                     android:layout_height="10dp"
                     android:layout_marginEnd="8dp"
-                    android:contentDescription="@string/arrowbutton"
+                    android:contentDescription="@string/arrow_button"
                     android:src="@drawable/ic_forward"
                     app:layout_constraintBottom_toBottomOf="@id/wholeProductText"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -124,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginTop="10dp"
-                    android:contentDescription="@string/categoryfield"
+                    android:contentDescription="@string/category_field"
                     android:src="@color/black5"
                     app:layout_constraintBottom_toBottomOf="@id/rvCategories"
                     app:layout_constraintTop_toBottomOf="@id/rvProduct" />
@@ -181,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:ellipsize="end"
-                    android:text="@string/wholeProduct"
+                    android:text="@string/whole_product"
                     android:textAlignment="viewStart"
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
@@ -196,7 +196,7 @@
                     android:layout_width="15dp"
                     android:layout_height="10dp"
                     android:layout_marginEnd="8dp"
-                    android:contentDescription="@string/arrowbutton"
+                    android:contentDescription="@string/arrow_button"
                     android:src="@drawable/ic_forward"
                     app:layout_constraintBottom_toBottomOf="@id/wholeCollectionText"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -217,7 +217,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginTop="10dp"
-                    android:contentDescription="@string/categoryfield"
+                    android:contentDescription="@string/category_field"
                     android:src="@color/black5"
                     app:layout_constraintBottom_toBottomOf="@id/rvShops"
                     app:layout_constraintTop_toBottomOf="@id/rvCollections" />
@@ -236,7 +236,7 @@
                     android:textColor="@color/mainGrey_Dark"
                     android:textSize="@dimen/font_large"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/wholeCollectionText"
+                    app:layout_constraintEnd_toStartOf="@+id/wholeeditorsChoiceText"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/editorsChoiceField" />
 
@@ -246,7 +246,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:ellipsize="end"
-                    android:text="@string/wholeProduct"
+                    android:text="@string/whole_product"
                     android:textAlignment="viewStart"
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
@@ -261,7 +261,7 @@
                     android:layout_width="15dp"
                     android:layout_height="10dp"
                     android:layout_marginEnd="8dp"
-                    android:contentDescription="@string/arrowbutton"
+                    android:contentDescription="@string/arrow_button"
                     android:src="@drawable/ic_forward"
                     app:layout_constraintBottom_toBottomOf="@id/wholeeditorsChoiceText"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -276,6 +276,60 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/shopsFieldTitle" />
+
+                <TextView
+                    android:id="@+id/shopsNewTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/layout_dimen"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:text="@string/title"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:textColor="@color/mainGrey_Dark"
+                    android:textSize="@dimen/font_large"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/wholeeditorsChoiceText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rvShops" />
+                <TextView
+                    android:id="@+id/wholeShopNewText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:text="@string/whole_product"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:textColor="@color/mainGrey_Dark"
+                    android:textSize="@dimen/font_small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/arrowButtonShopNew"
+                    app:layout_constraintTop_toBottomOf="@id/rvShops" />
+
+                <ImageView
+                    android:id="@+id/arrowButtonShopNew"
+                    android:layout_width="15dp"
+                    android:layout_height="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/arrow_button"
+                    android:src="@drawable/ic_forward"
+                    app:layout_constraintBottom_toBottomOf="@id/wholeShopNewText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/wholeShopNewText" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvShopNew"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/layout_dimen"
+                    android:alpha="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/shopsNewTitle" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

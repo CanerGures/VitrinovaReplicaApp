@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mobilliumvitrinovachallangeapp.R
 import com.example.mobilliumvitrinovachallangeapp.model.ShopX
+import java.lang.Exception
 
 class GetEditorsChoiceAdapter(private val shop: List<ShopX>) :
     RecyclerView.Adapter<GetEditorsChoiceAdapter.GetEditorsChoiceViewHolder>() {
@@ -30,6 +31,9 @@ class GetEditorsChoiceAdapter(private val shop: List<ShopX>) :
 
     override fun onBindViewHolder(holder: GetEditorsChoiceViewHolder, position: Int) {
         val currentItem = shop[position]
+        try {
+
+
         holder.tvShopName.text = currentItem.name
         holder.tvDefinition.text = currentItem.definition
 
@@ -55,6 +59,26 @@ class GetEditorsChoiceAdapter(private val shop: List<ShopX>) :
             .load(currentItem.cover.url)
             .fitCenter()
             .into(holder.imageBackGround)*/
+        }catch (e: Exception){
+            Glide.with(holder.itemView.context)
+                .load(holder.itemView.context.getString(R.string.empty_image_url))
+                .fitCenter()
+                .into(holder.ivProduct1)
+            Glide.with(holder.itemView.context)
+                .load(holder.itemView.context.getString(R.string.empty_image_url))
+                .fitCenter()
+                .into(holder.ivProduct2)
+            Glide.with(holder.itemView.context)
+                .load(holder.itemView.context.getString(R.string.empty_image_url))
+                .fitCenter()
+                .into(holder.ivProduct3)
+
+            Glide.with(holder.itemView.context)
+                .load(holder.itemView.context.getString(R.string.empty_image_url))
+                .fitCenter()
+                .circleCrop()
+                .into(holder.imageCircle)
+        }
 
     }
 

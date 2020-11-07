@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mobilliumvitrinovachallangeapp.R
 import com.example.mobilliumvitrinovachallangeapp.model.Collection
+import java.lang.Exception
 
 class GetCollectionAdapter(private val content: List<Collection>) :
     RecyclerView.Adapter<GetCollectionAdapter.GetCollectionViewHolder>() {
@@ -26,13 +27,21 @@ class GetCollectionAdapter(private val content: List<Collection>) :
 
     override fun onBindViewHolder(holder: GetCollectionViewHolder, position: Int) {
         val currentItem = content[position]
-        Glide.with(holder.itemView.context)
-            .load(currentItem.cover.url)
-            .fitCenter()
-            .into(holder.image)
+        try {
+            Glide.with(holder.itemView.context)
+                .load(currentItem.cover.url)
+                .fitCenter()
+                .into(holder.image)
 
-        holder.textUp.text = currentItem.title
-        holder.textDown.text = currentItem.definition
+            holder.textUp.text = currentItem.title
+            holder.textDown.text = currentItem.definition
+        }catch (e: Exception){
+            Glide.with(holder.itemView.context)
+                .load(holder.itemView.context.getString(R.string.empty_image_url))
+                .fitCenter()
+                .into(holder.image)
+        }
+
 
     }
 

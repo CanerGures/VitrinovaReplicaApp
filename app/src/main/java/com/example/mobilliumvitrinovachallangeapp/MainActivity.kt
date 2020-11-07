@@ -31,6 +31,7 @@ lateinit var recycViewProducts: RecyclerView
 lateinit var recycViewCategories: RecyclerView
 lateinit var recycViewCollections: RecyclerView
 lateinit var recycViewShops: RecyclerView
+lateinit var recycViewShopNew: RecyclerView
 private var homeViewModel: ContentViewModel? = null
 lateinit var searchView: FloatingSearchView
 lateinit var swipeToRefresh: SwipeRefreshLayout
@@ -38,7 +39,7 @@ lateinit var titlesProducts: TextView
 lateinit var titlesCategories: TextView
 lateinit var titlesCollections: TextView
 lateinit var titlesShops: TextView
-lateinit var titlesShop1: TextView
+lateinit var titlesShopsNew: TextView
 private val service: ApiService by lazy { WebClient.buildService(ApiService::class.java) }
 private var REQUEST_CODE_SPEECH_INPUT = 100
 
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         titlesCategories = findViewById(R.id.categoriesFieldTitle)
         titlesCollections = findViewById(R.id.collectionsFieldTitle)
         titlesShops = findViewById(R.id.shopsFieldTitle)
+        titlesShopsNew = findViewById(R.id.shopsNewTitle)
 
         voiceButton.setOnClickListener {
             speech()
@@ -79,11 +81,13 @@ class MainActivity : AppCompatActivity() {
             val listCategories: List<Category> = it[2].categories
             val listCollections: List<Collection> = it[3].collections
             val listShops: List<ShopX> = it[4].shops
+            val listShopNew : List<ShopX> = it[5].shops
 
             titlesProducts.text = it[1].title
             titlesCategories.text = it[2].title
             titlesCollections.text = it[3].title
             titlesShops.text = it[4].title
+            titlesShopsNew.text = it[5].title
 
             recycView = findViewById(R.id.rvFeatured)
             recycView.adapter = GetContentAdapter(listContent)
@@ -106,6 +110,7 @@ class MainActivity : AppCompatActivity() {
                 MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.product_margin))
             )
 
+
             recycViewCollections = findViewById(R.id.rvCollections)
             recycViewCollections.adapter = GetCollectionAdapter(listCollections)
             recycViewCollections.layoutManager =
@@ -120,6 +125,17 @@ class MainActivity : AppCompatActivity() {
             recycViewShops.addItemDecoration(
                 MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.shop_margin))
             )
+
+            recycViewShopNew = findViewById(R.id.rvShopNew)
+            recycViewShopNew.adapter = GetShopNewAdapter(listShopNew)
+            recycViewShopNew.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            recycViewShopNew.addItemDecoration(
+                MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.shop_margin))
+            )
+
+
+
             if (recycViewShops.onFlingListener == null)
                 snapHelper.attachToRecyclerView(recycViewShops)
 

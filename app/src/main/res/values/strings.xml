@@ -3,23 +3,29 @@
     <string name="title">title</string>
     <string name="subtitle">sub title</string>
     <string name="search">Search</string>
-    <string name="voicesearchcoverimage">voiceSearchCoverImage</string>
-    <string name="featureimagescover">featureimagescover</string>
-    <string name="featureimages">featureimages</string>
+    <string name="voice_search_cover_image">voiceSearchCoverImage</string>
+    <string name="feature_images_cover">featureimagescover</string>
+    <string name="feature_images">featureimages</string>
     <string name="product_images">product_images</string>
     <string name="most_new">EN YENİ ÜRÜNLER</string>
-    <string name="wholeProduct">TÜMÜ</string>
-    <string name="arrowbutton">arrowButton</string>
+    <string name="whole_product">TÜMÜ</string>
+    <string name="arrow_button">arrowButton</string>
     <string name="categories">KATEGORİLER</string>
     <string name="category_images">categoryImages</string>
-    <string name="categoryfield">categoryField</string>
+    <string name="category_field">categoryField</string>
     <string name="collections">KOLEKSİYONLAR</string>
-    <string name="collectionImage">collectionImage</string>
-    <string name="collectionImageShadow">collectionImageShadow</string>
+    <string name="collection_image">collectionImage</string>
+    <string name="collection_image_shadow">collectionImageShadow</string>
     <string name="vitrine_git_button">VİTRİNE GİT</string>
     <string name="shop_logo">shopLogo</string>
     <string name="product_image_3">productImage3</string>
     <string name="product_image_2">productImage2</string>
     <string name="product_image_1">productImage1</string>
     <string name="footer_shadow">footerShadow</string>
+    <string name="shop_new_product_count">%1$s ÜRÜN</string>
+    <string name="get_product">%1$s TL</string>
+    <string name="empty_image_url">https://pbs.twimg.com/media/C8LOKzbUQAEYU09?format=jpg&amp;name=large</string>
+    <string name="shirt_icon">shirtIcon</string>
+    <string name="shop_new_logo_photo">shopNewLogoPhoto</string>
+    <string name="shop_new_top_image">shopNewTopImage</string>
 </resources>

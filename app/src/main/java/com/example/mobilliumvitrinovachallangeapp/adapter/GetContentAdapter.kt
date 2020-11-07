@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mobilliumvitrinovachallangeapp.R
 import com.example.mobilliumvitrinovachallangeapp.model.Featured
+import java.lang.Exception
 
 class GetContentAdapter(private val content: List<Featured>) :
     RecyclerView.Adapter<GetContentAdapter.GetContentViewHolder>() {
@@ -26,14 +27,21 @@ class GetContentAdapter(private val content: List<Featured>) :
 
     override fun onBindViewHolder(holder: GetContentViewHolder, position: Int) {
         val currentItem = content[position]
-        Glide.with(holder.itemView.context)
-            .load(currentItem.cover.url)
-            .fitCenter()
-            .into(holder.image)
+        try {
+            Glide.with(holder.itemView.context)
+                .load(currentItem.cover.url)
+                .fitCenter()
+                .into(holder.image)
 
-        holder.textUp.text = currentItem.title
-        holder.textDown.text = currentItem.sub_title
+            holder.textUp.text = currentItem.title
+            holder.textDown.text = currentItem.sub_title
 
+        }catch (e: Exception){
+            Glide.with(holder.itemView.context)
+                .load(holder.itemView.context.getString(R.string.empty_image_url))
+                .fitCenter()
+                .into(holder.image)
+        }
     }
 
     override fun getItemCount(): Int {
