@@ -102,6 +102,23 @@
             app:layout_constraintTop_toTopOf="@id/tvShopNewName"
             android:layout_marginEnd="8dp"
             android:src="@color/black20"/>
+        <TextView
+            android:contentDescription="@string/shop_new_logo_photo"
+            android:id="@+id/shopNewLogoPhotoNull"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:layout_constraintEnd_toStartOf="@id/guideline5"
+            app:layout_constraintTop_toTopOf="@id/tvShopNewName"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/round_textview"
+            android:text="@string/round_textview_placeholder"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:visibility="gone"/>
+
+
+
         <ImageView
             android:contentDescription="@string/shirt_icon"
             android:id="@+id/icon"

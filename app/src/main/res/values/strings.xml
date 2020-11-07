@@ -28,4 +28,5 @@
     <string name="shirt_icon">shirtIcon</string>
     <string name="shop_new_logo_photo">shopNewLogoPhoto</string>
     <string name="shop_new_top_image">shopNewTopImage</string>
+    <string name="round_textview_placeholder">C</string>
 </resources>

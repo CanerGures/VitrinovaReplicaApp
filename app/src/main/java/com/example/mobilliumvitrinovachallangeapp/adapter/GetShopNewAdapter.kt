@@ -22,6 +22,7 @@ class GetShopNewAdapter(private val shopNew: List<ShopX>) :
         val textTitle: TextView = itemView.findViewById(R.id.tvShopNewName)
         val textDefinition: TextView = itemView.findViewById(R.id.tvShopNewDefinition)
         val textProductCount: TextView = itemView.findViewById(R.id.tvShopNewProductCount)
+        val shopNewLogoPhotoNull: TextView = itemView.findViewById(R.id.shopNewLogoPhotoNull)
         val shopNewParent: CardView = itemView.findViewById(R.id.shopNewParent)
     }
 
@@ -43,8 +44,10 @@ class GetShopNewAdapter(private val shopNew: List<ShopX>) :
                 .into(holder.shopNewLogoImage)
         }
         else{
-            //val redColor = Color.parseColor(R.color.purple_200.toString())
-            //holder.shopNewLogoImage.setImageResource()
+            val firstLetter = currentItem.name.take(1)
+            holder.shopNewLogoImage.visibility= View.GONE
+            holder.shopNewLogoPhotoNull.visibility= View.VISIBLE
+            holder.shopNewLogoPhotoNull.text = firstLetter
         }
        try {
         Glide.with(holder.itemView.context)
@@ -61,6 +64,9 @@ class GetShopNewAdapter(private val shopNew: List<ShopX>) :
                .load(holder.itemView.context.getString(R.string.empty_image_url))
                .fitCenter()
                .into(holder.image)
+           holder.textTitle.text = currentItem.name
+           holder.textDefinition.text = currentItem.definition
+           holder.textProductCount.text = holder.itemView.context.getString(R.string.shop_new_product_count, currentItem.product_count.toString())
        }
     }
 
