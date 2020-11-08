@@ -4,16 +4,18 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
+import androidx.core.content.ContextCompat
+import androidx.core.view.get
+import androidx.recyclerview.widget.*
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arlib.floatingsearchview.FloatingSearchView
+import com.bumptech.glide.Glide
 import com.example.mobilliumvitrinovachallangeapp.R
 import com.example.mobilliumvitrinovachallangeapp.adapter.*
 import com.example.mobilliumvitrinovachallangeapp.api.apiservice.ApiService
@@ -28,7 +30,7 @@ import com.google.gson.Gson
 import java.util.*
 
 
-lateinit var recycView: RecyclerView
+lateinit var recycViewContent: RecyclerView
 lateinit var recycViewProducts: RecyclerView
 lateinit var recycViewCategories: RecyclerView
 lateinit var recycViewCollections: RecyclerView
@@ -52,6 +54,8 @@ lateinit var listCollections: List<Collection>
 lateinit var listShops: List<ShopX>
 lateinit var listShopNew: List<ShopX>
 lateinit var listCategories: List<Category>
+lateinit var indicatorsContainer: LinearLayout
+lateinit var editorsChoiceField: ImageView
 
 
 private val service: ApiService by lazy { WebClient.buildService(ApiService::class.java) }
@@ -78,6 +82,8 @@ class MainActivity : AppCompatActivity() {
         buttonCollections = findViewById(R.id.wholeCollectionText)
         buttonShops = findViewById(R.id.wholeeditorsChoiceText)
         buttonShopsNew = findViewById(R.id.wholeShopNewText)
+        indicatorsContainer = findViewById(R.id.indicatorsContainer)
+        editorsChoiceField = findViewById(R.id.editorsChoiceField)
 
 
 
@@ -132,6 +138,7 @@ class MainActivity : AppCompatActivity() {
         homeViewModel = ViewModelFactory(repo).create(ContentViewModel::class.java)
         homeViewModel?.fetchLive?.observe(this) {
             val snapHelper: SnapHelper = PagerSnapHelper()
+            val helper: SnapHelper = LinearSnapHelper()
             listContent = it[0].featured
             listProduct = it[1].products
             listCategories = it[2].categories
@@ -145,10 +152,24 @@ class MainActivity : AppCompatActivity() {
             titlesShops.text = it[4].title
             titlesShopsNew.text = it[5].title
 
-            recycView = findViewById(R.id.rvFeatured)
-            recycView.adapter = GetContentAdapter(listContent)
-            recycView.layoutManager =
+            recycViewContent = findViewById(R.id.rvFeatured)
+            recycViewContent.adapter = GetContentAdapter(listContent)
+            recycViewContent.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            recycViewContent.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val layoutManager = recyclerView.layoutManager
+                    val snapView = snapHelper.findSnapView(layoutManager)
+                    val snapPosition = snapView?.let { it1 -> layoutManager?.getPosition(it1) }
+                    if (snapPosition != null) {
+                        currentIndicator(snapPosition)
+                    }
+                }
+            })
+            setUpIndicators()
+            currentIndicator(0)
+
 
             recycViewProducts = findViewById(R.id.rvProduct)
             recycViewProducts.adapter = GetProductAdapter(listProduct)
@@ -181,6 +202,19 @@ class MainActivity : AppCompatActivity() {
             recycViewShops.addItemDecoration(
                 MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.shop_margin))
             )
+            recycViewShops.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val layoutManager = recyclerView.layoutManager
+                    val snapView = snapHelper.findSnapView(layoutManager)
+                    val snapPosition = snapView?.let { it1 -> layoutManager?.getPosition(it1) }
+                    val backgroundImage = listShops[snapPosition!!].cover.url
+                    Glide.with(this@MainActivity.applicationContext)
+                        .load(backgroundImage)
+                        .fitCenter()
+                        .into(editorsChoiceField)
+                }
+            })
 
             recycViewShopNew = findViewById(R.id.rvShopNew)
             recycViewShopNew.adapter = GetShopNewAdapter(listShopNew)
@@ -193,6 +227,7 @@ class MainActivity : AppCompatActivity() {
 
 
             if (recycViewShops.onFlingListener == null)
+                helper.attachToRecyclerView(recycViewContent)
                 snapHelper.attachToRecyclerView(recycViewShops)
 
             if (swipeToRefresh.isRefreshing) {
@@ -233,6 +268,46 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
+    }
+
+    private fun setUpIndicators() {
+        val indicators = arrayOfNulls<ImageView>(listContent.size)
+        val layoutParams: LinearLayout.LayoutParams =
+            LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+        layoutParams.setMargins(8, 0, 8, 0)
+        for (i in indicators.indices) {
+            indicators[i] = ImageView(applicationContext)
+            indicators[i].apply {
+                this?.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext, R.drawable.indicator_inactive
+                    )
+                )
+                this?.layoutParams = layoutParams
+
+            }
+            indicatorsContainer.addView(indicators[i])
+        }
+    }
+
+    private fun currentIndicator(index: Int) {
+        val childCount = indicatorsContainer.childCount
+        for (i in 0 until childCount) {
+            val imageView = indicatorsContainer[i] as ImageView
+            if (i == index) {
+                imageView.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext, R.drawable.indicator_active
+                    )
+                )
+            } else {
+                imageView.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext, R.drawable.indicator_inactive
+                    )
+                )
+            }
+        }
     }
 
 

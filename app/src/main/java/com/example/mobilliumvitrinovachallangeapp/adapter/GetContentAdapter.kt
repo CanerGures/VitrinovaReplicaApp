@@ -3,6 +3,7 @@ package com.example.mobilliumvitrinovachallangeapp.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +29,8 @@ class GetContentAdapter(private val content: List<Featured>) :
 
     override fun onBindViewHolder(holder: GetContentViewHolder, position: Int) {
         val currentItem = content[position]
+        holder.parentImage.animation =
+            AnimationUtils.loadAnimation(holder.itemView.context, R.anim.viewpager_animation)
         try {
             Glide.with(holder.itemView.context)
                 .load(currentItem.cover.url)
@@ -37,7 +40,7 @@ class GetContentAdapter(private val content: List<Featured>) :
             holder.textUp.text = currentItem.title
             holder.textDown.text = currentItem.sub_title
 
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Glide.with(holder.itemView.context)
                 .load(holder.itemView.context.getString(R.string.empty_image_url))
                 .fitCenter()

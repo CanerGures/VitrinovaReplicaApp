@@ -5,6 +5,7 @@
     android:id="@+id/parentImage"
     android:layout_height="200dp">
 
+
     <ImageView
         android:id="@+id/contentImage"
         android:layout_width="match_parent"
@@ -21,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/feature_images_cover"
-        android:src="@color/black20"
+        android:src="@color/black40"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
