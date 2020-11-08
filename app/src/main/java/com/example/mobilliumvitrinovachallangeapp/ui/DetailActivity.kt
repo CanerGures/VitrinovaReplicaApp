@@ -25,7 +25,11 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-
+        supportActionBar?.hide()
+        this.overridePendingTransition(
+            R.anim.detail_page_animation_enter,
+            R.anim.detail_page_animation_leave
+        )
         val getShopNewObject: String? = intent.getStringExtra("listShopNew")
         rvDetail = findViewById(R.id.rvDetail)
         if (getShopNewObject != null) {
@@ -76,6 +80,12 @@ class DetailActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.finish()
+        overridePendingTransition(R.anim.page_animation_enter, R.anim.page_animation_leave)
     }
 
 }

@@ -5,11 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mobilliumvitrinovachallangeapp.R
 import com.example.mobilliumvitrinovachallangeapp.model.Featured
-import java.lang.Exception
 
 class GetContentAdapter(private val content: List<Featured>) :
     RecyclerView.Adapter<GetContentAdapter.GetContentViewHolder>() {
@@ -17,6 +17,7 @@ class GetContentAdapter(private val content: List<Featured>) :
         val image: ImageView = itemView.findViewById(R.id.contentImage)
         val textUp: TextView = itemView.findViewById(R.id.textUp)
         val textDown: TextView = itemView.findViewById(R.id.textDown)
+        val parentImage: ConstraintLayout = itemView.findViewById(R.id.parentImage)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GetContentViewHolder {

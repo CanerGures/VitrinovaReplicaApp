@@ -62,6 +62,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
+        this.overridePendingTransition(
+            R.anim.detail_page_animation_enter,
+            R.anim.detail_page_animation_leave
+        )
         val voiceButton: ImageView = findViewById(R.id.voiceSearchImage)
         searchView = findViewById(R.id.floating_search_view)
         swipeToRefresh = findViewById(R.id.itemSwipeToRefresh)
@@ -74,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         buttonCollections = findViewById(R.id.wholeCollectionText)
         buttonShops = findViewById(R.id.wholeeditorsChoiceText)
         buttonShopsNew = findViewById(R.id.wholeShopNewText)
+
 
 
         voiceButton.setOnClickListener {
@@ -223,6 +228,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
     }
 
 
