@@ -33,6 +33,7 @@ A replica of Vitrinova application. Done with mvvm+repo and retrofit. I practice
 <li><a href="https://github.com/arimorty/floatingsearchview">Floating SearchView</a></li>
 <li><a href="https://github.com/bumptech/glide">Glide</a></li>
 <li><a href="https://material.io/design">Material Design</a></li>
+<li><a href="https://developer.android.com/training/transitions">Page Transitions</a></li>
 
 ## Architecture📃
 The app uses MVVM [Model-View-ViewModel] architecture to have a unidirectional flow of data, separation of concern, and a lot more.
