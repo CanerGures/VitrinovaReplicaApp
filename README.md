@@ -5,6 +5,7 @@
 
 A replica of Vitrinova application. Done with mvvm+repo and retrofit. I practiced recyclerview, working with big size of json data through retrofit. Also learned snap helper,animations, nested scrollview, searchview, swipe to refresh and voice search.
 
+## Screen Shots📱
 <p><img height= "350" src="https://media.giphy.com/media/NV9k8uZAhtSC3vTGiW/giphy.gif" alt="Gif1" />
 <img height= "350" src="https://media.giphy.com/media/wfiUvUIR3rOH8TZdPt/giphy.gif" alt="Gif2" />
 <img height= "350" src="https://media.giphy.com/media/bNsK9dGpIbtB4pyG3K/giphy.gif" alt="Gif3" />
@@ -14,6 +15,10 @@ A replica of Vitrinova application. Done with mvvm+repo and retrofit. I practice
 <img height= "350" src="https://media.giphy.com/media/BHybCYuKVtXOLwCcuQ/giphy.gif" alt="Gif2" />
 <img height= "350" src="https://media.giphy.com/media/5swfG68Y97TBnecGyR/giphy.gif" alt="Gif3" />
 <img height= "350" src="https://i.imgur.com/R2zA6SZ.jpg" alt="Gif4" /></p>
+
+## Built With 🚧
+<code><img src="https://www.vectorlogo.zone/logos/kotlinlang/kotlinlang-ar21.svg"></code>
+<code><img src="https://www.vectorlogo.zone/logos/android/android-ar21.svg"></code>
 
 ## Libraries and Tools 🛠
 
@@ -29,7 +34,7 @@ A replica of Vitrinova application. Done with mvvm+repo and retrofit. I practice
 <li><a href="https://github.com/bumptech/glide">Glide</a></li>
 <li><a href="https://material.io/design">Material Design</a></li>
 
-## Architecture
+## Architecture📃
 The app uses MVVM [Model-View-ViewModel] architecture to have a unidirectional flow of data, separation of concern, and a lot more.
 
 ![Architecture](https://developer.android.com/topic/libraries/architecture/images/final-architecture.png)
