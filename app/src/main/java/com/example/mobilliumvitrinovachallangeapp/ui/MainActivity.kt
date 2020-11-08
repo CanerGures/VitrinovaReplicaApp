@@ -13,7 +13,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SnapHelper
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arlib.floatingsearchview.FloatingSearchView
 import com.bumptech.glide.Glide
@@ -57,6 +60,7 @@ lateinit var listShopNew: List<ShopX>
 lateinit var listCategories: List<Category>
 lateinit var indicatorsContainer: LinearLayout
 lateinit var editorsChoiceField: ImageView
+private var counter: Int = 0
 
 
 private val service: ApiService by lazy { WebClient.buildService(ApiService::class.java) }
@@ -139,7 +143,8 @@ class MainActivity : AppCompatActivity() {
         homeViewModel = ViewModelFactory(repo).create(ContentViewModel::class.java)
         homeViewModel?.fetchLive?.observe(this) {
             val snapHelper: SnapHelper = PagerSnapHelper()
-            val helper: SnapHelper = LinearSnapHelper()
+            val snapHelper2: SnapHelper = PagerSnapHelper()
+
             listContent = it[0].featured
             listProduct = it[1].products
             listCategories = it[2].categories
@@ -168,9 +173,11 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             })
-            setUpIndicators()
+            if (counter == 0) {
+                setUpIndicators()
+                counter += 1
+            }
             currentIndicator(0)
-
 
             recycViewProducts = findViewById(R.id.rvProduct)
             recycViewProducts.adapter = GetProductAdapter(listProduct)
@@ -230,9 +237,14 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
             if (recycViewShops.onFlingListener == null)
-                helper.attachToRecyclerView(recycViewContent)
                 snapHelper.attachToRecyclerView(recycViewShops)
+
+            if (recycViewContent.onFlingListener == null) {
+                snapHelper2.attachToRecyclerView(recycViewContent)
+            }
+
 
             if (swipeToRefresh.isRefreshing) {
                 swipeToRefresh.isRefreshing = false
