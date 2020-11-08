@@ -2,6 +2,7 @@ package com.example.mobilliumvitrinovachallangeapp.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -213,6 +214,9 @@ class MainActivity : AppCompatActivity() {
                         .load(backgroundImage)
                         .fitCenter()
                         .into(editorsChoiceField)
+                    editorsChoiceField.setColorFilter(R.color.gray_filter, PorterDuff.Mode.SCREEN)
+
+
                 }
             })
 

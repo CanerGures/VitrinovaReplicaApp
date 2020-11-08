@@ -14,4 +14,5 @@
     <color name="color_transparent">#00000000</color>
     <color name="mainGrey_Dark">#FF616161</color>
     <color name="color_discount">#FF9E9E9E</color>
+    <color name="gray_filter">#B8B8B8</color>
 </resources>
