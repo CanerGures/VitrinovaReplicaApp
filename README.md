@@ -14,7 +14,7 @@ A replica of Vitrinova application. Done with mvvm+repo and retrofit. I practice
 <p><img height= "350" src="https://media.giphy.com/media/q9lBGC8XgSpdcoaZYY/giphy.gif" alt="Gif1" />
 <img height= "350" src="https://media.giphy.com/media/BHybCYuKVtXOLwCcuQ/giphy.gif" alt="Gif2" />
 <img height= "350" src="https://media.giphy.com/media/5swfG68Y97TBnecGyR/giphy.gif" alt="Gif3" />
-<img height= "350" src="https://i.imgur.com/R2zA6SZ.jpg" alt="Gif4" /></p>
+<img height= "350" width="200" src="https://i.imgur.com/R2zA6SZ.jpg" alt="Gif4" /></p>
 
 ## Built With 🚧
 <code><img src="https://www.vectorlogo.zone/logos/kotlinlang/kotlinlang-ar21.svg"></code>
