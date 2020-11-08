@@ -14,9 +14,9 @@ import com.example.mobilliumvitrinovachallangeapp.R
 import com.example.mobilliumvitrinovachallangeapp.model.Product
 
 class
-GetProductAdapter(private val product: List<Product>) :
-    RecyclerView.Adapter<GetProductAdapter.GetProductViewHolder>() {
-    inner class GetProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+GetProductAdapterDetail(private val product: List<Product>) :
+    RecyclerView.Adapter<GetProductAdapterDetail.GetProductDetailViewHolder>() {
+    inner class GetProductDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val parentCard: CardView = itemView.findViewById(R.id.parentProductCard)
         val image: ImageView = itemView.findViewById(R.id.productImage)
         val textHeader: TextView = itemView.findViewById(R.id.productHeader)
@@ -25,17 +25,18 @@ GetProductAdapter(private val product: List<Product>) :
         val itemPriceDiscount: TextView = itemView.findViewById(R.id.itemPriceDiscount)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GetProductViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GetProductDetailViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.products_content, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.products_content_detail, parent, false)
 
-        return GetProductViewHolder(itemView)
+        return GetProductDetailViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: GetProductViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GetProductDetailViewHolder, position: Int) {
         val currentItem = product[position]
         holder.parentCard.animation =
-            AnimationUtils.loadAnimation(holder.itemView.context, R.anim.rv_animations)
+            AnimationUtils.loadAnimation(holder.itemView.context, R.anim.rv_linear_animations)
         try {
             Glide.with(holder.itemView.context)
                 .load(currentItem.images[0].url)
@@ -44,22 +45,27 @@ GetProductAdapter(private val product: List<Product>) :
 
             holder.textHeader.text = currentItem.title
             holder.textSubHeader.text = currentItem.shop.name
-            holder.itemPrice.text = holder.itemView.context.getString(R.string.get_product, currentItem.old_price.toString())
+            holder.itemPrice.text = holder.itemView.context.getString(
+                R.string.get_product,
+                currentItem.old_price.toString()
+            )
 
             if (currentItem.old_price != 0) {
-                holder.itemPriceDiscount.text = holder.itemView.context.getString(R.string.get_product, currentItem.old_price.toString())
+                holder.itemPriceDiscount.text = holder.itemView.context.getString(
+                    R.string.get_product,
+                    currentItem.old_price.toString()
+                )
                 holder.itemPriceDiscount.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             } else {
                 holder.itemPriceDiscount.visibility = View.GONE
             }
 
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Glide.with(holder.itemView.context)
                 .load(holder.itemView.context.getString(R.string.empty_image_url))
                 .fitCenter()
                 .into(holder.image)
         }
-
 
 
     }

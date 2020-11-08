@@ -30,6 +30,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 }
 
 dependencies {
@@ -56,6 +57,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
     implementation 'com.squareup.retrofit2:converter-simplexml:2.2.0'
     implementation 'com.squareup.okhttp:okhttp:2.7.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
     //Material
     implementation 'com.google.android.material:material:1.3.0-alpha03'
     //floatingsearchview

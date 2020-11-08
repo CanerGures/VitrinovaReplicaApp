@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/itemSwipeToRefresh"
@@ -188,7 +188,7 @@
                     android:textColor="@color/mainGrey_Dark"
                     android:textSize="@dimen/font_small"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/arrowButton"
+                    app:layout_constraintEnd_toStartOf="@id/arrowButtonCollection"
                     app:layout_constraintTop_toBottomOf="@id/categoriesField" />
 
                 <ImageView

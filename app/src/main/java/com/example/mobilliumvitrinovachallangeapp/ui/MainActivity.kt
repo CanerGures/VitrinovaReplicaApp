@@ -1,4 +1,4 @@
-package com.example.mobilliumvitrinovachallangeapp
+package com.example.mobilliumvitrinovachallangeapp.ui
 
 import android.app.Activity
 import android.content.Intent
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arlib.floatingsearchview.FloatingSearchView
+import com.example.mobilliumvitrinovachallangeapp.R
 import com.example.mobilliumvitrinovachallangeapp.adapter.*
 import com.example.mobilliumvitrinovachallangeapp.api.apiservice.ApiService
 import com.example.mobilliumvitrinovachallangeapp.api.client.WebClient
@@ -23,6 +24,7 @@ import com.example.mobilliumvitrinovachallangeapp.model.Collection
 import com.example.mobilliumvitrinovachallangeapp.util.MarginItemDecoration
 import com.example.mobilliumvitrinovachallangeapp.viewmodel.ContentViewModel
 import com.example.mobilliumvitrinovachallangeapp.viewmodel.ViewModelFactory
+import com.google.gson.Gson
 import java.util.*
 
 
@@ -40,6 +42,18 @@ lateinit var titlesCategories: TextView
 lateinit var titlesCollections: TextView
 lateinit var titlesShops: TextView
 lateinit var titlesShopsNew: TextView
+lateinit var buttonProducts: TextView
+lateinit var buttonCollections: TextView
+lateinit var buttonShops: TextView
+lateinit var buttonShopsNew: TextView
+lateinit var listContent: List<Featured>
+lateinit var listProduct: List<Product>
+lateinit var listCollections: List<Collection>
+lateinit var listShops: List<ShopX>
+lateinit var listShopNew: List<ShopX>
+lateinit var listCategories: List<Category>
+
+
 private val service: ApiService by lazy { WebClient.buildService(ApiService::class.java) }
 private var REQUEST_CODE_SPEECH_INPUT = 100
 
@@ -56,6 +70,11 @@ class MainActivity : AppCompatActivity() {
         titlesCollections = findViewById(R.id.collectionsFieldTitle)
         titlesShops = findViewById(R.id.shopsFieldTitle)
         titlesShopsNew = findViewById(R.id.shopsNewTitle)
+        buttonProducts = findViewById(R.id.wholeProductText)
+        buttonCollections = findViewById(R.id.wholeCollectionText)
+        buttonShops = findViewById(R.id.wholeeditorsChoiceText)
+        buttonShopsNew = findViewById(R.id.wholeShopNewText)
+
 
         voiceButton.setOnClickListener {
             speech()
@@ -65,6 +84,38 @@ class MainActivity : AppCompatActivity() {
             observeResponse()
 
         }
+        buttonShopsNew.setOnClickListener {
+            val currentItem = listShopNew
+            val gson = Gson()
+            val intent = Intent(it.context, DetailActivity::class.java)
+            intent.putExtra("listShopNew", gson.toJson(currentItem))
+            it.context.startActivity(intent)
+        }
+
+        buttonShops.setOnClickListener {
+            val currentItem = listShops
+            val gson = Gson()
+            val intent = Intent(it.context, DetailActivity::class.java)
+            intent.putExtra("listShops", gson.toJson(currentItem))
+            it.context.startActivity(intent)
+        }
+
+        buttonCollections.setOnClickListener {
+            val currentItem = listCollections
+            val gson = Gson()
+            val intent = Intent(it.context, DetailActivity::class.java)
+            intent.putExtra("listCollections", gson.toJson(currentItem))
+            it.context.startActivity(intent)
+        }
+
+        buttonProducts.setOnClickListener {
+            val currentItem = listProduct
+            val gson = Gson()
+            val intent = Intent(it.context, DetailActivity::class.java)
+            intent.putExtra("listProduct", gson.toJson(currentItem))
+            it.context.startActivity(intent)
+        }
+
         observeResponse()
 
     }
@@ -76,12 +127,12 @@ class MainActivity : AppCompatActivity() {
         homeViewModel = ViewModelFactory(repo).create(ContentViewModel::class.java)
         homeViewModel?.fetchLive?.observe(this) {
             val snapHelper: SnapHelper = PagerSnapHelper()
-            val listContent: List<Featured> = it[0].featured
-            val listProduct: List<Product> = it[1].products
-            val listCategories: List<Category> = it[2].categories
-            val listCollections: List<Collection> = it[3].collections
-            val listShops: List<ShopX> = it[4].shops
-            val listShopNew : List<ShopX> = it[5].shops
+            listContent = it[0].featured
+            listProduct = it[1].products
+            listCategories = it[2].categories
+            listCollections = it[3].collections
+            listShops = it[4].shops
+            listShopNew = it[5].shops
 
             titlesProducts.text = it[1].title
             titlesCategories.text = it[2].title
@@ -119,7 +170,7 @@ class MainActivity : AppCompatActivity() {
                 MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.product_margin))
             )
             recycViewShops = findViewById(R.id.rvShops)
-            recycViewShops.adapter = GetEditorsChoiceAdapter(listShops)
+            recycViewShops.adapter = GetShopsAdapter(listShops)
             recycViewShops.layoutManager =
                 LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             recycViewShops.addItemDecoration(

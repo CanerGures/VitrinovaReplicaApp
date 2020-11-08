@@ -9,11 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mobilliumvitrinovachallangeapp.R
 import com.example.mobilliumvitrinovachallangeapp.model.ShopX
-import java.lang.Exception
 
-class GetEditorsChoiceAdapter(private val shop: List<ShopX>) :
-    RecyclerView.Adapter<GetEditorsChoiceAdapter.GetEditorsChoiceViewHolder>() {
-    inner class GetEditorsChoiceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class GetShopsAdapter(private val shop: List<ShopX>) :
+    RecyclerView.Adapter<GetShopsAdapter.GetShopViewHolder>() {
+    inner class GetShopViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //val imageBackGround: ImageView = itemView.findViewById(R.id.editorsChoiceField)
         val imageCircle: ImageView = itemView.findViewById(R.id.ivImage)
         val ivProduct1: ImageView = itemView.findViewById(R.id.ivProduct1Image)
@@ -23,42 +22,41 @@ class GetEditorsChoiceAdapter(private val shop: List<ShopX>) :
         val tvDefinition: TextView = itemView.findViewById(R.id.tvDefinition)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GetEditorsChoiceViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GetShopViewHolder {
         val itemView =
             LayoutInflater.from(parent.context).inflate(R.layout.shops_content, parent, false)
-        return GetEditorsChoiceViewHolder(itemView)
+        return GetShopViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: GetEditorsChoiceViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GetShopViewHolder, position: Int) {
         val currentItem = shop[position]
         try {
 
+            holder.tvShopName.text = currentItem.name
+            holder.tvDefinition.text = currentItem.definition
 
-        holder.tvShopName.text = currentItem.name
-        holder.tvDefinition.text = currentItem.definition
+            Glide.with(holder.itemView.context)
+                .load(currentItem.popular_products[0].images[0].url)
+                .fitCenter()
+                .into(holder.ivProduct1)
+            Glide.with(holder.itemView.context)
+                .load(currentItem.popular_products[1].images[0].url)
+                .fitCenter()
+                .into(holder.ivProduct2)
+            Glide.with(holder.itemView.context)
+                .load(currentItem.popular_products[2].images[0].url)
+                .fitCenter()
+                .into(holder.ivProduct3)
 
-        Glide.with(holder.itemView.context)
-            .load(currentItem.popular_products[0].images[0].url)
-            .fitCenter()
-            .into(holder.ivProduct1)
-        Glide.with(holder.itemView.context)
-            .load(currentItem.popular_products[1].images[0].url)
-            .fitCenter()
-            .into(holder.ivProduct2)
-        Glide.with(holder.itemView.context)
-            .load(currentItem.popular_products[2].images[0].url)
-            .fitCenter()
-            .into(holder.ivProduct3)
-
-        Glide.with(holder.itemView.context)
-            .load(currentItem.logo.url)
-            .fitCenter()
-            .circleCrop()
-            .into(holder.imageCircle)
-        /*Glide.with(holder.itemView.context)
-            .load(currentItem.cover.url)
-            .fitCenter()
-            .into(holder.imageBackGround)*/
+            Glide.with(holder.itemView.context)
+                .load(currentItem.logo.url)
+                .fitCenter()
+                .circleCrop()
+                .into(holder.imageCircle)
+            /*Glide.with(holder.itemView.context)
+                .load(currentItem.cover.url)
+                .fitCenter()
+                .into(holder.imageBackGround)*/
         }catch (e: Exception){
             Glide.with(holder.itemView.context)
                 .load(holder.itemView.context.getString(R.string.empty_image_url))

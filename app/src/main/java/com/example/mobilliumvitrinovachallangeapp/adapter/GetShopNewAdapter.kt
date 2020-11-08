@@ -1,6 +1,5 @@
 package com.example.mobilliumvitrinovachallangeapp.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mobilliumvitrinovachallangeapp.R
 import com.example.mobilliumvitrinovachallangeapp.model.ShopX
-import java.lang.Exception
 
 class GetShopNewAdapter(private val shopNew: List<ShopX>) :
     RecyclerView.Adapter<GetShopNewAdapter.GetShopNewViewHolder>() {
@@ -39,8 +37,9 @@ class GetShopNewAdapter(private val shopNew: List<ShopX>) :
 
         if (currentItem.logo != null){
             Glide.with(holder.itemView.context)
-                .load(currentItem.logo)
+                .load(currentItem.logo.url)
                 .fitCenter()
+                .circleCrop()
                 .into(holder.shopNewLogoImage)
         }
         else{
